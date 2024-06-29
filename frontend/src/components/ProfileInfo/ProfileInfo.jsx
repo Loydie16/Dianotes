@@ -138,14 +138,36 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
             <Mail className="mr-2 h-4 w-4" />
             {userInfo.email}
           </DropdownMenuLabel>
-          <DropdownMenuSeparator />
+
           <DropdownMenuGroup>
-            <DropdownMenuItem className="hover:cursor-pointer">
-              <PenLine className="mr-2 h-4 w-4" />
-              <span>Change Password</span>
+            <DropdownMenuSeparator className="sm:hidden" />
+            <DropdownMenuLabel className="justify-center items-center flex sm:hidden">
+              Theme:
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator className="sm:hidden" />
+            <DropdownMenuItem
+              className="hover:cursor-pointer sm:hidden"
+              onClick={() => setTheme("light")}
+            >
+              <Sun className="mr-2 h-4 w-4" />
+              <span>Light</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="hover:cursor-pointer sm:hidden"
+              onClick={() => setTheme("dark")}
+            >
+              <Moon className="mr-2 h-4 w-4" />
+              <span>Dark</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="hover:cursor-pointer sm:hidden"
+              onClick={() => setTheme("system")}
+            >
+              <Settings2 className="mr-2 h-4 w-4" />
+              <span>System</span>
             </DropdownMenuItem>
             <DropdownMenuSub>
-              <DropdownMenuSubTrigger>
+              <DropdownMenuSubTrigger className="hidden sm:flex">
                 <Sun className="mr-2 h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute mr-2 h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 <span>Theme</span>
@@ -177,11 +199,14 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
               </DropdownMenuPortal>
             </DropdownMenuSub>
           </DropdownMenuGroup>
-
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="hover:cursor-pointer">
+            <PenLine className="mr-2 h-4 w-4" />
+            <span>Change Password</span>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             className="hover:cursor-pointer"
-            setShowAlertDialog={true}
             onClick={() => setShowAlertDialog(true)}
           >
             <LogOut className="mr-2 h-4 w-4" />
