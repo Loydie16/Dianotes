@@ -1,1 +1,1 @@
-export const BASE_URL = /* "http://localhost:5000" */ "http://dianotes-api.vercel.app";
+export const BASE_URL = /* "http://localhost:5000" */ "https://dianotes-api.vercel.app";
