@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axiosInstance from "../utils/axiosInstance";
+//import axiosInstance from "../utils/axiosInstance";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Eye, EyeOff, Loader2, MoveLeft } from "lucide-react";
@@ -77,7 +78,7 @@ function Login() {
   const onSubmit = async (value) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.post("/login", {
+      const response = await axios.post('https://dianotes-api.vercel.app/login', {
         email: value.email,
         password: value.password,
       });
