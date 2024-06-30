@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import {
   LogOut,
   Mail,
@@ -86,7 +87,7 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
       await axiosInstance.post("/logout");
       navigate("/login");
       toast({
-        title: "Logout Succesfull",
+        title: "Logout Successful",
         description: "Goodbye!",
       });
     } catch (error) {
@@ -222,7 +223,7 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Alert Dialog for Delete Confirmation */}
+      {/* Alert Dialog for Logout Confirmation */}
       <AlertDialog open={showAlertDialog} onOpenChange={setShowAlertDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -261,5 +262,11 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
     </>
   );
 }
+
+ProfileInfo.propTypes = {
+  userInfo: PropTypes.object.isRequired,
+  onSearchNote: PropTypes.func.isRequired,
+  handleClearSearch: PropTypes.func.isRequired,
+};
 
 export default ProfileInfo;

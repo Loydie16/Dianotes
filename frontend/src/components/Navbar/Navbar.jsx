@@ -1,6 +1,8 @@
+import PropTypes from "prop-types"; // Import PropTypes
 import { useState } from "react";
 import SearchBar from "../Searchbar/Searchbar";
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
+
 function Navbar({ userInfo, onSearchNote, handleClearSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -40,5 +42,12 @@ function Navbar({ userInfo, onSearchNote, handleClearSearch }) {
     </header>
   );
 }
+
+// PropTypes validation
+Navbar.propTypes = {
+  userInfo: PropTypes.object.isRequired, // Define userInfo as a required object prop
+  onSearchNote: PropTypes.func.isRequired, // Define onSearchNote as a required function prop
+  handleClearSearch: PropTypes.func.isRequired, // Define handleClearSearch as a required function prop
+};
 
 export default Navbar;

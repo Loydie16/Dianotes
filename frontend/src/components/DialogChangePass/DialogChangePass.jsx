@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"; // Import PropTypes
+
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -113,7 +115,8 @@ function DialogChangePass({ isOpen, onClose }) {
         navigate("/login");
         toast({
           title: "Pasword Changed Successfully",
-          description: "Logged out due of changing your password. Try logging in again!",
+          description:
+            "Logged out due of changing your password. Try logging in again!",
         });
       }
     } catch (error) {
@@ -128,7 +131,7 @@ function DialogChangePass({ isOpen, onClose }) {
   };
 
   return (
-    <Dialog open={isOpen} >
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Change Password</DialogTitle>
@@ -227,5 +230,11 @@ function DialogChangePass({ isOpen, onClose }) {
     </Dialog>
   );
 }
+
+// PropTypes validation
+DialogChangePass.propTypes = {
+  isOpen: PropTypes.bool.isRequired, // Define isOpen as a required boolean prop
+  onClose: PropTypes.func.isRequired, // Define onClose as a required function prop
+};
 
 export default DialogChangePass;

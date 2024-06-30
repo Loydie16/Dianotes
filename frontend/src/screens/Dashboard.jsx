@@ -27,7 +27,7 @@ import {
 function Dashboard() {
   const { openModal } = useContext(NoteProvider);
 
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const [allNotes, setAllNotes] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
   const [loading, setLoading] = useState(false); 

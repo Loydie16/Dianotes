@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"; // Import PropTypes
+
 import { useContext } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { SquarePlus } from "lucide-react";
@@ -18,11 +20,14 @@ function AddNoteCard({ className }) {
           <SquarePlus className="h-20 w-20" />
         </Button>
       </CardContent>
-      <CardFooter className="flex justify-center text-2xl">
-        Add Note
-      </CardFooter>
+      <CardFooter className="flex justify-center text-2xl">Add Note</CardFooter>
     </Card>
   );
 }
+
+// PropTypes validation
+AddNoteCard.propTypes = {
+  className: PropTypes.string, // Define className as a string prop
+};
 
 export default AddNoteCard;
