@@ -75,7 +75,7 @@ function ForgotPassword() {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "User not found. Please register first.",
+        description: error.message,
       });
     } finally {
       setLoading(false);
