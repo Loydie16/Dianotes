@@ -25,19 +25,16 @@ app.use(helmet());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: "https://dianotes.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  allowedHeaders:
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+  allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   credentials: true,
   preflightContinue: false,
   optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
-
-// Ensure preflight requests are handled properly
-app.options("*", cors(corsOptions));
+app.options("*", cors(corsOptions)); // Apply this before your routes
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
