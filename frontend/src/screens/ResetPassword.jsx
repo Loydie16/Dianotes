@@ -94,7 +94,7 @@ function ResetPassword() {
   const onSubmit = async (value) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.post("/reset-password", {
+      const response = await axiosInstance.put("/reset-password", {
         email,
         password: value.password,
       });
@@ -124,7 +124,6 @@ function ResetPassword() {
   };
 
   const resendOTP = async () => {
-    setLoading(true);
     setIsOtpButtonDisabled(true);
     setTimer(60); // 1 minute countdown
     try {
@@ -150,8 +149,6 @@ function ResetPassword() {
         title: "Error",
         description: error.message,
       });
-    } finally {
-      setLoading(false);
     }
   };
 

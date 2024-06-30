@@ -102,11 +102,10 @@ function SignUp() {
 
       if (!response.data.error) {
         toast({
-          variant: "Success! Verify your account now.",
-          title:
-            "Account created successfully! Email verification link is sent to your email address",
+          title: "Account created successfully",
+          description: "Email verification link is sent to your email address.",
         });
-        navigate("/dashboard");
+        navigate("/login");
       }
 
       if (response.data.error) {

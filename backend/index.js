@@ -183,8 +183,8 @@ app.post("/validate-otp", (req, res) => {
   }
 });
 
-// Reset or Change Password
-app.post("/reset-password", async (req, res) => {
+// Reset or Change Password when the user forgot their password
+app.put("/reset-password", async (req, res) => {
   const { email, password } = req.body;
 
   // Read the token from the HTTP-only cookie
@@ -230,6 +230,38 @@ app.post("/reset-password", async (req, res) => {
     res.status(500).json({ error: true, message: "Internal server error." });
   }
 });
+
+// Change password when the user is logged in
+app.put("/change-password", authenticateToken, async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const { user } = req.user;
+
+  if (!oldPassword || !newPassword) {
+    return res.status(400).json({ error: true, message: "Old and new passwords are required." });
+  }
+
+  try {
+    const userRecord = await User.findById(user._id);
+
+    if (!userRecord) {
+      return res.json({ error: true, message: "User not found." });
+    }
+
+    const isMatch = await bcrypt.compare(oldPassword, userRecord.password);
+
+    if (!isMatch) {
+      return res.json({ error: true, message: "Old password is incorrect." });
+    }
+
+    userRecord.password = newPassword;
+    await userRecord.save();
+
+    res.status(200).json({ error: false, message: "Password changed successfully!" });
+  } catch (error) {
+    res.status(500).json({ error: true, message: "Internal server error." });
+  }
+});
+
 
 //Create account
 app.post("/create-account", async (req, res) => {
@@ -309,6 +341,34 @@ app.get("/verify-email", async (req, res) => {
   }
 });
 
+app.post("/send-verification-email", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email: email });
+
+    if (!user) {
+      return res.json({ error: true, message: "User not found" });
+    }
+
+    if (!user.verified) {
+      await sendVerificationEmail(user, req);
+      return res.json({
+        error: false,
+        message: "The verification link has been sent to your email address.",
+      });
+    } 
+
+    if(user.verified) {
+      return res.json({ error: true, message: "Email is already verified" });
+    }
+
+  } catch (error) {
+  
+    res.status(500).json({ error: true, message: "Internal Server Error" });
+  }
+});
+
 //Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -329,7 +389,6 @@ app.post("/login", async (req, res) => {
     }
 
     if (!user.verified) {
-      await sendVerificationEmail(user, req);
       return res.status(400).json({
         error: true,
         message: "Please verify your email first",
@@ -349,7 +408,7 @@ app.post("/login", async (req, res) => {
 
     res.json({ error: false, message: "Login successful!" });
   } catch (error) {
-    console.error("Error during login:", error);
+    //console.error("Error during login:", error);
     res.status(500).json({ error: true, message: "Internal Server Error" });
   }
 });

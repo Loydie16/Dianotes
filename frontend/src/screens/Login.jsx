@@ -96,7 +96,7 @@ function Login() {
             variant: "destructive",
             title: "Email not verified",
             description:
-              "We sent again an email verifcation link to your email address. Check it out.",
+              "Click the verify email button below and verify your email address.",
           });
         } else {
           toast({
@@ -117,7 +117,7 @@ function Login() {
             variant: "destructive",
             title: "Email not verified",
             description:
-              "We sent again an email verifcation link to your email address. Check it out.",
+              "Click the verify email button below and verify your email address.",
           });
         } else {
           toast({
@@ -258,6 +258,9 @@ function Login() {
                 <Link to="/signup" className="font-bold dark:text-orange-200">
                   Sign Up
                 </Link>
+              </span>
+              <span className="dark:text-orange-200 text-xs italic font-semibold flex justify-center mt-4">
+                <Link to="/send-verification-email">Verify Email</Link>
               </span>
               <span className="flex text-sm justify-center italic mt-6">
                 &#169; Dianotes. 2024

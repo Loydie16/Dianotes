@@ -50,6 +50,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import DialogChangePass from "@/components/DialogChangePass/DialogChangePass";
 
 import SearchBar from "../Searchbar/Searchbar";
 
@@ -61,6 +62,9 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
   const [loading, setLoading] = useState(false);
 
   const [showAlertDialog, setShowAlertDialog] = useState(false);
+
+  const [showChangePasswordDialog, setShowChangePasswordDialog] =
+    useState(false);
 
   const handleSearch = () => {
     if (searchQuery) {
@@ -134,13 +138,20 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
             <User className="mr-2 h-4 w-4" />
             {userInfo.userName}
           </DropdownMenuLabel>
-          <DropdownMenuLabel className="flex text-[10px]">
+          <DropdownMenuLabel className="flex text-[11px]">
             <Mail className="mr-2 h-4 w-4" />
             {userInfo.email}
           </DropdownMenuLabel>
+          <DropdownMenuItem
+            className="hover:cursor-pointer"
+            onClick={() => setShowChangePasswordDialog(true)}
+          >
+            <PenLine className="mr-2 h-4 w-4" />
+            <span>Change Password</span>
+          </DropdownMenuItem>
 
           <DropdownMenuGroup>
-            <DropdownMenuSeparator className="sm:hidden" />
+            <DropdownMenuSeparator />
             <DropdownMenuLabel className="justify-center items-center flex sm:hidden">
               Theme:
             </DropdownMenuLabel>
@@ -199,11 +210,7 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
               </DropdownMenuPortal>
             </DropdownMenuSub>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="hover:cursor-pointer">
-            <PenLine className="mr-2 h-4 w-4" />
-            <span>Change Password</span>
-          </DropdownMenuItem>
+
           <DropdownMenuSeparator />
           <DropdownMenuItem
             className="hover:cursor-pointer"
@@ -247,6 +254,10 @@ function ProfileInfo({ userInfo, onSearchNote, handleClearSearch }) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+      <DialogChangePass
+        isOpen={showChangePasswordDialog}
+        onClose={() => setShowChangePasswordDialog(false)}
+      />
     </>
   );
 }

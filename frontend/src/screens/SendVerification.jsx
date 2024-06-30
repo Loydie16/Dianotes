@@ -40,7 +40,7 @@ const FormSchema = z.object({
   }),
 });
 
-function ForgotPassword() {
+function SendVerification() {
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -54,16 +54,16 @@ function ForgotPassword() {
   const onSubmit = async (value) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.post("/send-otp", {
+      const response = await axiosInstance.post("/send-verification-email", {
         email: value.email,
       });
 
       if (!response.data.error) {
         toast({
-          title: "OTP Sent",
-          description: "Check your email for the OTP to reset your password.",
+          title: "Verification email sent successfully",
+          description: "Check your email for the link to verify your account.",
         });
-        navigate(`/reset-password?email=${value.email}`);
+        navigate(`/login`);
       } else {
         toast({
           variant: "destructive",
@@ -74,8 +74,8 @@ function ForgotPassword() {
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "User not found. Please register first.",
+        title: "Error ito",
+        description: error.message,
       });
     } finally {
       setLoading(false);
@@ -87,10 +87,9 @@ function ForgotPassword() {
       <Card className="w-[450px]">
         <CardHeader className="flex flex-row justify-between">
           <div className="space-y-2">
-            <CardTitle>Forgot Password</CardTitle>
+            <CardTitle>Send Verification Link</CardTitle>
             <CardDescription>
-              Enter your email address to receive a one-time password (OTP) for
-              resetting your password.
+                Enter your email address to send a verification link to reset your password.
             </CardDescription>
           </div>
           <div className="flex gap-2">
@@ -136,7 +135,7 @@ function ForgotPassword() {
                 )}
               />
               <Button className="w-full" type="submit" disabled={loading}>
-                {loading ? "Sending..." : "Send OTP"}
+                {loading ? "Sending..." : "Send"}
               </Button>
             </form>
           </Form>
@@ -151,4 +150,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default SendVerification;

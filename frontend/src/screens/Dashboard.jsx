@@ -23,6 +23,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
+
 function Dashboard() {
   const { openModal } = useContext(NoteProvider);
 
@@ -186,7 +187,7 @@ function Dashboard() {
       <main className="container mx-auto">
         {loading ? ( // Show skeletons while loading
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-            {Array.from({ length: allNotes.length + 1}).map((_, index) => (
+            {Array.from({ length: allNotes.length + 1 }).map((_, index) => (
               <SkeletonNoteCard key={index} />
             ))}
           </div>

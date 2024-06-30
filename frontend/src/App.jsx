@@ -6,6 +6,9 @@ import Dashboard from "./screens/Dashboard";
 import VerifyEmail from "./screens/VerifyEmail";
 import ForgotPassword from "./screens/ForgotPassowrd";
 import ResetPassword from "./screens/ResetPassword";
+import SendVerification from "./screens/SendVerification";
+import PageNotFound from "./screens/PageNotFound";
+import Error from "./screens/Error";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NoteProvider } from "./context/NoteContext";
@@ -16,6 +19,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <Error />,
   },
   {
     path: "login",
@@ -26,6 +30,7 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
     ],
+    errorElement: <Error />,
   },
   {
     path: "signup",
@@ -36,6 +41,7 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
     ],
+    errorElement: <Error />,
   },
   {
     path: "dashboard",
@@ -46,19 +52,33 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
     ],
+    errorElement: <Error />,
   },
   {
     path: "verify-email",
     element: <VerifyEmail />,
+    errorElement: <Error />,
   },
   {
     path: "forgot-password",
     element: <ForgotPassword />,
+    errorElement: <Error />,
   },
   {
     path: "reset-password",
     element: <ResetPassword />,
-  }
+    errorElement: <Error />,
+  },
+  {
+    path: "send-verification-email",
+    element: <SendVerification />,
+    errorElement: <Error />,
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
+    errorElement: <Error />,
+  },
 ]);
 
 function App() {
