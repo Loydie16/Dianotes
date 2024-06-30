@@ -1,1 +1,1 @@
-export const BASE_URL = "https://dianotes-api.vercel.app/";
+export const BASE_URL = "https://dianotes-api.vercel.app";
