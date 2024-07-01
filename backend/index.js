@@ -19,7 +19,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const { authenticateToken } = require("./utilities");
-
+app.set("trust proxy", true);
 app.use(express.json());
 app.use(helmet());
 app.use(cookieParser());
