@@ -19,12 +19,12 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const { authenticateToken } = require("./utilities");
-app.set("trust proxy", true);
+/* app.set("trust proxy", true); */
 app.use(express.json());
 app.use(helmet());
 app.use(cookieParser());
 
-/* const corsOptions = {
+/* const corsOptions = {  
   origin: process.env.FRONTEND_URL,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
   allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
@@ -43,14 +43,14 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-const limiter = rateLimit({
+/* const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 100, // limit each IP to 100 requests per windowMs
   message: {
     error: true,
     message: "Too many requests, please try again after 1 minute.",
   },
-});
+}); */
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -112,7 +112,7 @@ const sendVerificationEmail = async (user, req) => {
   }
 };
 
-app.use(limiter);
+/* app.use(limiter); */
 
 app.get("/", (req, res) => {
   res.send("hello world");
