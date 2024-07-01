@@ -24,24 +24,24 @@ app.use(express.json());
 app.use(helmet());
 app.use(cookieParser());
 
-const corsOptions = {
+/* const corsOptions = {
   origin: process.env.FRONTEND_URL,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  /* allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization", */
+  allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   credentials: true,
   preflightContinue: false,
   optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // Apply this before your routes
+app.options("*", cors(corsOptions)); // Apply this before your routes */
 
-/* const corsOptions = {
+const corsOptions = {
   origin: process.env.FRONTEND_URL,
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
-app.use(cors(corsOptions)); */
+app.use(cors(corsOptions));
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
