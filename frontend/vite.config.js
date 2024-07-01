@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5000" /* "https://dianotes-api.vercel.app" */,
+        target: /* "http://localhost:5000" */ "https://dianotes-api.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
