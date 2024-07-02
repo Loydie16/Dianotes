@@ -147,7 +147,7 @@ app.post("/send-otp", async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       maxAge: 2 * 60 * 1000, // 2 minutes
-      sameSite: "Strict",
+      sameSite: 'none',
     });
 
     res.status(200).json({ error: false, message: "OTP sent to your email." });
@@ -404,14 +404,26 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    const accessToken = jwt.sign({ user }, process.env.ACCESS_TOKEN_SECRET, {
+    // Construct payload without sensitive fields
+    const payload = {
+      user: {
+        _id: user._id,
+        userName: user.userName,
+        email: user.email,
+        verified: user.verified,
+        // You can include other fields as needed
+      },
+    };
+
+    // Sign JWT token with the constructed payload
+    const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "3d",
     });
 
     res.cookie("token", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: 'none',
       maxAge: 3 * 24 * 60 * 60 * 1000,
     });
 
@@ -636,7 +648,7 @@ app.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: 'none',
   });
   res.json({ message: "Logged out successfully" });
 });
