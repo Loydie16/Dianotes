@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -78,5 +80,31 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addUtilities }) {
+      const newUtilities = {
+        ".text-stroke": {
+          "-webkit-text-stroke-width": "1px",
+        },
+        ".text-stroke-2": {
+          "-webkit-text-stroke-width": "2px",
+        },
+        ".text-stroke-3": {
+          "-webkit-text-stroke-width": "3px",
+        },
+        ".text-stroke-black": {
+          "-webkit-text-stroke-color": "#008080",
+        },
+        ".text-stroke-white": {
+          "-webkit-text-stroke-color": "#fff",
+        },
+        ".text-stroke-red": {
+          "-webkit-text-stroke-color": "#f00",
+        },
+        // Add more colors if needed
+      };
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    }),
+  ],
 };
