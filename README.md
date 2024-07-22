@@ -14,6 +14,7 @@ This project is made to learn and practice the MERN stack. I used Vercel to host
 - Express.js
 - React
 - Node.js
+- Tailwind CSS
 - Vercel (Frontend Hosting)
 - Render (Backend Hosting)
 
