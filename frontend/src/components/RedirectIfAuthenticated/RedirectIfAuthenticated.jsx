@@ -31,7 +31,7 @@ const RedirectIfAuthenticated = () => {
     checkAuthStatus();
   }, []);
 
-  if (isAuthenticated != null) {
+  if (isAuthenticated === null) {
     return (
       <div className="flex flex-col justify-center items-center h-screen">
         <Loader2 className="animate-spin" size={32} />
