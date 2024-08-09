@@ -1,11 +1,9 @@
-;
-
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axiosInstance from "../utils/axiosInstance";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Eye, EyeOff, Loader2, MoveLeft } from "lucide-react";
+import { Eye, EyeOff, Loader2, MoveLeft, Info } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
@@ -32,6 +30,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { ModeToggle } from "@/components/mode-toggle";
 
 const FormSchema = z.object({
@@ -194,11 +197,31 @@ function Login() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input
-                          className=""
-                          placeholder="Enter your email"
-                          {...field}
-                        />
+                        <div className="relative">
+                          <Input
+                            className=""
+                            placeholder="Enter your email"
+                            {...field}
+                          />
+
+                          <div className="absolute right-3 top-[57%] transform -translate-y-1/2 cursor-pointer ">
+                            <Popover>
+                              <PopoverTrigger>
+                                <Info />
+                              </PopoverTrigger>
+                              <PopoverContent
+                                side="right"
+                                className="flex justify-center flex-col items-center space-y-2"
+                              >
+                                <h1 className="font-bold">
+                                  Sample account you can use
+                                </h1>
+                                <p>Email: sampleacc@email.com</p>
+                                <p>Password: Sample@123</p>
+                              </PopoverContent>
+                            </Popover>
+                          </div>
+                        </div>
                       </FormControl>
 
                       <FormMessage />

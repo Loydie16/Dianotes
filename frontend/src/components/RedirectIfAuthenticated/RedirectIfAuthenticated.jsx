@@ -31,10 +31,15 @@ const RedirectIfAuthenticated = () => {
     checkAuthStatus();
   }, []);
 
-  if (isAuthenticated === null) {
+  if (isAuthenticated != null) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center h-screen">
         <Loader2 className="animate-spin" size={32} />
+
+        <h1 className=" mt-10 font-medium">
+          Please wait a moment as the backend of this website is hosted on a
+          free service, which might cause some delays
+        </h1>
       </div>
     );
   }
